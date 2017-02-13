@@ -1,0 +1,22 @@
+#!/bin/bash
+
+NETNS=torrent
+IP=/usr/bin/ip
+VETH0_IP=10.200.1.1
+VETH1_IP=10.200.1.2
+
+check_exit ()
+{
+  exit_code=$1
+  error_msg=$2
+
+  if [ $exit_code -ne 0 ]
+  then
+    echo "${during}"
+    echo "Exiting..."
+    exit 1
+  else
+    echo -n "[SUCCESS]   "
+  fi
+}
+
