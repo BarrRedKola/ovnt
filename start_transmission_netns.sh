@@ -1,7 +1,6 @@
 #!/bin/sh
 
-IP=/usr/bin/ip
-NETNS=torrent
+source config 
 
 #start transmission in the network namespace
 #NEVER use /etc/transmission/start, as it would start in the root namespace

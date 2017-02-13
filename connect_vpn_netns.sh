@@ -1,14 +1,13 @@
 #!/bin/sh
-
-NETNS=torrent
-IP=/usr/bin/ip
-VETH0_IP=10.200.1.1
-VETH1_IP=10.200.1.2
+#load config which stores variables and exit status checker function
+source config
 
 
 #ipecho.net/plain is a good stuff to check which IP is used to connect to the internet
 echo "Currently the netns shows himself from this IP"
-$IP netns exec $NETNS curl http://ipecho.net/plain;echo
+ip_addr=$($IP netns exec $NETNS curl http://ipecho.net/plain)
+check_exit $? "Unable to connect to ipecho.net/plain"
+
 
 
 #Here, we assume you use nordVPN and your openVPN config files are located on a mounted
@@ -21,8 +20,6 @@ cd $VPN_ROOT
 #Establishing connection to your VPN service
 echo "Enabling openVPN in netns ${NETNS}"
 $IP netns exec $NETNS openvpn --daemon --config $VPN_FILE
-echo 
-
 
 #here, we look after the tun0 interface in the network namespace
 #until it is not up and running, we don't process
@@ -39,9 +36,12 @@ echo
 
 #now, we check again our IP
 echo "Currently the netns shows himself from this IP"
-$IP netns exec $NETNS curl http://ipecho.net/plain;echo
+ip_addr_vpn=$($IP netns exec $NETNS curl http://ipecho.net/plain)
 
-echo
-echo "Does it differ from the previous one? Double-check!"
-echo "If YES! U're good to go ;)"
-echo
+if [ "$ip_addr" == "$ip_addr_vpn" ]
+then
+  echo "IP addresses match (${ip_addr} = ${ip_addr_vpn}...VPN connection would have not established"
+  exit 1
+else
+  echo "Namespace ${NETNS} has a different IP (${ip_addr_vpn}) than the root namespace (${ip_addr})... WE ARE UP AND RUNNING!"
+fi
