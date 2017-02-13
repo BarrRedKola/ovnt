@@ -1,5 +1,6 @@
 # ovnt
 Running Transmission dameon in a network namespace on the OpenWRT router
+
 These scripts are doing what the above sentence is tellin' ya!
 
 Usage:
@@ -33,7 +34,10 @@ and samba service and still have more than 1M)
    - curl (for getting what's your IP looks like from outside
    - ip (for namespace stuffs)
    - socat (for forwarding local access to the network namespace)
-   - transmission-daemon-openssl (transmission daemon itself)
+   - transmission-daemon-openssl (transmission daemon itself) - After installing transmission, it becomes enabled by default,
+   which means OpenWRT will starts it whenever it has been rebooted! We need to avoid this, as it would not start transmission
+   in the namespace (however, one may can hack those parts of the system as well). In order to achieve this, the easiest way is
+   to go to Luci->System->Startup and look for transmission. Once, found click on the Enabled button to disable it.
    - openvpn-openssl (For OpenVPN)
  - Further, but not recommended packages for occasional troubleshooting
    - tcpdump-mini (tracing packets/monitoring interfaces if something does not work)
@@ -63,5 +67,9 @@ The second option is similar to the previous, but for subnets! (under the assump
 
 DO NOT CHANGE the other IP range and virtual ethernet device name, as the scripts are configuring them in this way!
 
+If you want your OpenWRT system to do this automatically after every boot, just add
+    
+    sh start.sh
+to the Local startup scripts (Luci->System->Startup)
 
 If further questions arise or you would like to ask me to create a network namespace enabled openwrt image,  just ask here!
