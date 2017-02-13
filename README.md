@@ -15,7 +15,8 @@ In case you want to stop everything:
 Before you start, the followings are required:
  - a custom OpenWRT image, which has the network namespace option enabled in its kernel (usually, default images have no such option, so you need to create/compile your own image)
    - if you are lucky, you have a TP-LINK WDR3600 as mine, so you can just use my custom image (also located in this repository)
- - Install the following packages on your router (they will fit into WDR3600's memory, if not too many other services are installed)
+ - Install the following packages on your router (they will fit into WDR3600's memory, if not too many other services are installed. I have all the followings with additional ddns,printing, 
+and samba service and still have more than 1M)
    - curl (for getting what's your IP looks like from outside
    - ip (for namespace stuffs)
    - socat (for forwarding local access to the network namespace)
