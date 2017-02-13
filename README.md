@@ -17,7 +17,7 @@ Before you start, the followings are required:
    - if you are lucky, you have a TP-LINK WDR3600 as mine, so you can just use my custom image (also located in this repository)
  - I used nordVPN service, and I store the corresponging file in /mnt/data/nordVPN. Under that directory I used nl15.nordvpn.com.udp1194.ovpn file. Change this settings in connect_vpn_netns.sh 
 if needed.
-   - OpenVPN may asks for username and password, which would stop the whole process at the most important checkpoint!
+ - OpenVPN may asks for username and password, which would stop the whole process at the most important checkpoint!
 In order to avoid asking for your credentials, open the corresponding .ovpn file and look for:
 
     auth-user-pass
@@ -43,12 +43,12 @@ as this little OpenWRT guy has a bit more complicated firewall (as being a route
 just open /etc/config/firewall and look for the 'zone' where your 'lan' is configured. Usually it looks like this:
 
 
-      config zone
-      option name 'lan
-      option input 'ACCEPT'
-      option output 'ACCEPT'
-      option forward 'ACCEPT'
-      option network 'lan'
+        config zone
+        option name 'lan
+        option input 'ACCEPT'
+        option output 'ACCEPT'
+        option forward 'ACCEPT'
+        option network 'lan'
 
 A zone section groups one or more interfaces and serves as a source or destination for forwardings, rules and redirects. Masquerading (NAT) of outgoing traffic is controlled on a per-zone basis.
 Add the following lines at the end of zone configuration:
