@@ -23,8 +23,7 @@ In order to avoid asking for your credentials, open the corresponding .ovpn file
 
     auth-user-pass
 
-Create a text file called auth.txt, where the first line is your username, whilst the second is your password. And nothing more, do not put any other things 
-comments into this file. Place this file next to the .ovpn file and change the above-mentioned line as follows:
+Create a text file called auth.txt, where the first line is your username, whilst the second is your password. And nothing more, do not put any other things and/or comments into this file. Place this file next to the .ovpn file and change the above-mentioned line as follows:
 
     auth-user-pass auth.txt
 
