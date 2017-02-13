@@ -53,8 +53,8 @@ just open /etc/config/firewall and look for the 'zone' where your 'lan' is confi
         option forward 'ACCEPT'
         option network 'lan'
 
-A zone section groups one or more interfaces and serves as a source or destination for forwardings, rules and redirects. Masquerading (NAT) of outgoing traffic is controlled on a per-zone basis.
-Add the following lines at the end of zone configuration:
+A zone section groups one or more interfaces and serves as a source or destination for forwardings, rules and redirects. Masquerading (NAT) of outgoing traffic is controlled on a per-zone basis. OpenWRT's firewall creates NAT between the 'lan' and the 'wan' zone (also defined in /etc/config/firewall). If we do not want to create new zones and special rules, we just need to add our namespace-related interfaces as well to 'lan' zone, and everything will be working then.
+To this end, add the following lines at the end of zone configuration:
 
     option device 'veth0 br-lan' 
     option subnet '10.200.1.0/24 192.168.89.0/24'
