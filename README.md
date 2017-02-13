@@ -1,7 +1,8 @@
-# ovnt
-Running Transmission dameon in a network namespace on the OpenWRT router
+# ovnt 
+Running Transmission dameon in a network namespace on the OpenWRT router.
 
-These scripts are doing what the above sentence is tellin' ya!
+OVNT = Openwrt+Vpn+Network namespace+Transmission-daemon
+
 
 Usage:
 
