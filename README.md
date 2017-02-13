@@ -30,13 +30,13 @@ Create a text file called auth.txt, where the first line is your username, whils
 
  - Install the following packages on your router (they will fit into WDR3600's memory, if not too many other services are installed. I have all the followings with additional ddns,printing, 
 and samba service and still have more than 1M)
-   - curl (for getting what's your IP looks like from outside
+   - curl (for using web-based service to check what's your IP looks like from outside)
    - ip (for namespace stuffs)
    - socat (for forwarding local access to the network namespace)
    - transmission-daemon-openssl (transmission daemon itself) - After installing transmission, it becomes enabled by default,
    which means OpenWRT will starts it whenever it has been rebooted! We need to avoid this, as it would not start transmission
    in the namespace (however, one may can hack those parts of the system as well). In order to achieve this, the easiest way is
-   to go to Luci->System->Startup and look for transmission. Once, found click on the Enabled button to disable it.
+   to go to Luci->System->Startup and look for transmission. Once found, click on the Enabled button to disable it.
    - openvpn-openssl (For OpenVPN)
  - Further, but not recommended packages for occasional troubleshooting
    - tcpdump-mini (tracing packets/monitoring interfaces if something does not work)
