@@ -16,7 +16,7 @@ In case you want to stop everything:
 Before you start, the followings are required:
  - a custom OpenWRT image, which has the network namespace option enabled in its kernel (usually, default images have no such option, so you need to create/compile your own image)
    - if you are lucky, you have a TP-LINK WDR3600 as mine, so you can just use my custom image (also located in this repository)
- - For VPN, I used nordVPN service, and I store the corresponging file in /mnt/data/nordVPN. Under that directory I used nl15.nordvpn.com.udp1194.ovpn file. Change this settings in connect_vpn_netns.sh 
+ - For VPN, I used nordVPN service, and I store a randomly selected configuration file (nl15.nordvpn.com.udp1194.ovpn) in /mnt/data/nordVPN. Change this settings in connect_vpn_netns.sh 
 if needed.
  - OpenVPN may asks for username and password, which would stop the whole process at the most important checkpoint!
 In order to avoid asking for your credentials, open the corresponding .ovpn file and look for:
