@@ -66,6 +66,9 @@ The second option is similar to the previous, but for subnets! (under the assump
 
 
 DO NOT CHANGE the other subnet (10.200.1.0/24) and virtual ethernet device name (veth0), as the scripts configure them in this way!
+
+After everything went fine, add the checkMyTorrentIp.png.torrent file (can be found in this repo as well) to your transmission-daemon and look for the tracker status! It shall also  print out the IP address of your VPN enabled network namespace. 
+
 -------
 If you want your OpenWRT system to do the whole thing automatically after every boot, just add
     
