@@ -4,17 +4,16 @@ source config
 
 
 #ipecho.net/plain is a good stuff to check which IP is used to connect to the internet
-echo "Currently the netns shows himself from this IP"
-ip_addr=$($IP netns exec $NETNS curl http://ipecho.net/plain)
+ip_addr=$(curl http://ipecho.net/plain)
 check_exit $? "Unable to connect to ipecho.net/plain"
+echo "Currently, the router shows himself from this IP: ${ip_addr}"
 
 
 
-#Here, we assume you use nordVPN and your openVPN config files are located on a mounted
-#pendrive at /mnt/data/nordVPN
-VPN_ROOT=/mnt/data/nordVPN
-VPN_FILE=nl15.nordvpn.com.udp1194.ovpn
-
+echo "Calculating the best server w.r.t. RTT"
+sh get_best_server.sh
+echo "--------------------------------------"
+VPN_FILE=$(cat last_best_server)
 cd $VPN_ROOT
 
 #Establishing connection to your VPN service
@@ -25,23 +24,25 @@ $IP netns exec $NETNS openvpn --daemon --config $VPN_FILE
 #until it is not up and running, we don't process
 echo "Waiting the VPN connectivity became established..."
 retval=1
-while [ $retval -gt 0 ] 
+while [ $retval -gt 0 ]
 do
   echo -n "/\.-."
-  #now, we see after the tun0 interface, which when came up return status ($?) will be 0, instead of 1
+  #if tun0 interface was created, then grep returns 0, which means success!
   retval=$($IP netns exec $NETNS ifconfig|grep tun0 > /dev/null;echo $?)
   sleep 1
 done
 echo
 
 #now, we check again our IP
-echo "Currently the netns shows himself from this IP"
 ip_addr_vpn=$($IP netns exec $NETNS curl http://ipecho.net/plain)
+echo "Currently the netns shows himself from this IP: ${ip_addr_vpn}"
+
+
 
 if [ "$ip_addr" == "$ip_addr_vpn" ]
 then
-  echo "IP addresses match (${ip_addr} = ${ip_addr_vpn}...VPN connection would have not established"
+  echo "Same IPs ==> VPN connection could have not been established"
   exit 1
 else
-  echo "Namespace ${NETNS} has a different IP (${ip_addr_vpn}) than the root namespace (${ip_addr})... WE ARE UP AND RUNNING!"
+  echo "Different IPs ==> WE ARE UP AND RUNNING!"
 fi
