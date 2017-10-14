@@ -7,7 +7,7 @@ VETH1_IP=10.200.1.2
 
 #Here, we assume you use nordVPN and your openVPN config files are located on a mounted
 #pendrive at /mnt/data/nordVPN
-VPN_ROOT=~/nordVPN/openvpn_configs/
+VPN_ROOT=/mnt/data/nordVPN
 #this variable will be used as a grep argument to filter out the vpn servers that are in the same country
 VPN_COUNTRY=uk
 
