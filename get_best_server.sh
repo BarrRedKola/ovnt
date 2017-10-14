@@ -12,7 +12,8 @@ do
   echo -n "Min RTT to $server:  "
   current_min=$(ping -c3 $server|grep min|cut -d '=' -f 2|cut -d '/' -f 1|awk '{print $1}')
   echo $current_min
-  if (( $(echo "$min > $current_min" |bc -l) ))
+  c=$(echo "$min > $current_min" |bc -l)
+  if [ $c -eq 1 ]
   then
     min=$current_min
     best_server=$i
