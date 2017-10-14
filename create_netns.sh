@@ -38,16 +38,16 @@ initialize_veths ()
   echo "Setting up IP address for veth1..."
   $IP netns exec $NETNS $IP addr add $VETH1_IP/24 dev veth1
   check_exit $? "Unable to set IP for veth1 in netns ${NETNS}"
-  
+
   #And bringing them up
   echo "Bringing veth0 up..."
   $IP link set dev veth0 up
   check_exit $? "Unable to bring up veth0"
-  
+
   echo "Brining veth1 in namespace ${NETNS} up..."
   $IP netns exec $NETNS $IP link set dev veth1 up
   check_exit $? "Unable to bring up veth1 in netns ${NETNS}"
-  
+
 
   #Default gateway needs to be set in the namespace to route everything to the
   #other end of the veth pair located in the root namespace

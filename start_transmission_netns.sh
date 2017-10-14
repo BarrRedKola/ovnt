@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source config 
+source config
 
 #start transmission in the network namespace
 #NEVER use /etc/transmission/start, as it would start in the root namespace
@@ -17,4 +17,4 @@ echo "Create a socket on the root namespace that redirects RPC access on veth0 t
 socat tcp-listen:9091,reuseaddr,fork tcp-connect:10.200.1.2:9091 &
 
 echo "[DONE]"
-echo 
+echo
