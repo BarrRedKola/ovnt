@@ -13,7 +13,7 @@ In case you want to stop everything:
     # sh dismiss_netns_en_masse.sh
 
 -------
-#IMPORTANT!
+# IMPORTANT!
 Before you start, the followings are required:
  - a custom OpenWRT image, which has the network namespace option enabled in its kernel (usually, default images have no such option, so you need to create/compile your own image)
    - if you are lucky, you have a TP-LINK WDR3600 as mine, so you can just use my custom image (also located in this repository)
