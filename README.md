@@ -17,9 +17,10 @@ In case you want to stop everything:
 Before you start, the followings are required:
  - a custom OpenWRT image, which has the network namespace option enabled in its kernel (usually, default images have no such option, so you need to create/compile your own image)
    - if you are lucky, you have a TP-LINK WDR3600 as mine, so you can just use my custom image (also located in this repository)
- - For VPN, I used nordVPN service, and I store a randomly selected configuration file (nl15.nordvpn.com.udp1194.ovpn) in /mnt/data/nordVPN. Change this settings in connect_vpn_netns.sh 
-if needed.
- - OpenVPN may asks for username and password, which would stop the whole process at the most important checkpoint!
+ - For VPN, I used nordVPN service, and I store the configuration files in /mnt/data/nordVPN. Change this settings in config file if needed.
+ - According to the nordVPN filenames, and the VPN_COUNTRY set in config file, the script iterates through the (udp) VPN services in your country (again, defined by VPN_COUNTRY in config), and measures the RTT.
+ - The best server w.r.t. RTT will be selected to connect to!
+ - Note that OpenVPN may asks for username and password, which would stop the whole process at the most important checkpoint!
 In order to avoid asking for your credentials, open the corresponding .ovpn file and look for:
 
     auth-user-pass
@@ -39,6 +40,7 @@ and samba service and still have more than 1M)
    in the namespace (however, one may can hack those parts of the system as well). In order to achieve this, the easiest way is
    to go to Luci->System->Startup and look for transmission. Once found, click on the Enabled button to disable it.
    - openvpn-openssl (For OpenVPN)
+   - bc (for examining floating point RTT values for the VPN servers)
  - Further, but not recommended packages for occasional troubleshooting
    - tcpdump-mini (tracing packets/monitoring interfaces if something does not work)
    - nano (just for more comfortable text editing than vi)
